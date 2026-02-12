@@ -76,11 +76,17 @@ android {
 
     namespace "com.repairshopapp"
     defaultConfig {
-        applicationId "com.repairshopapp"
+        applicationId "com.repairshop"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        missingDimensionStrategy 'react-native-camera', 'general'
+        // applicationId "com.repairshopapp"
+        // minSdkVersion rootProject.ext.minSdkVersion
+        // targetSdkVersion rootProject.ext.targetSdkVersion
+        // versionCode 1
+        // versionName "1.0"
     }
     signingConfigs {
         debug {
@@ -102,6 +108,16 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17 // Ensure this matches the target
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17' // Ensure this matches the compileOptions
+    }
+
+
 }
 
 dependencies {
