@@ -1,12 +1,12 @@
 import React, {useState, useCallback} from 'react';
-import {TextInput, ScrollView, StyleSheet, Image} from 'react-native';
+import {TextInput, ScrollView, StyleSheet} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // import AudioRecorderPlayer from 'react-native-audio-recorder-player';
-import {getCustomerById} from '../database/customersRepo';
+import {getCustomerById, updateCustomer} from '../database/customersRepo';
 import AppButton from '../components/AppButton';
-import {updateCustomer} from '../database/customersRepo';
 import DeviceDropdown from '../components/DeviceDropdown';
+import PhotoPicker from '../components/PhotoPicker';
 import {DEFAULT_CATEGORIES} from '../screens/SettingsScreen';
 import {todayJalali} from '../utils/persianCalendar';
 
@@ -35,15 +35,13 @@ export default function CustomerEditScreen({route, navigation}) {
 
   if (!form) return null;
 
-  console.log('Form: ', form);
-
   const save = async () => {
     await updateCustomer(form);
-    navigation.navigate('خانه');
+    navigation.popToTop();
   };
 
   return (
-    <ScrollView style={{padding: 16}}>
+    <ScrollView contentContainerStyle={styles.container}>
       <TextInput
         placeholder="نام و نام خانوادگی"
         value={form.fullName}
@@ -56,6 +54,7 @@ export default function CustomerEditScreen({route, navigation}) {
         placeholder="شماره موبایل"
         placeholderTextColor="#999"
         value={form.phone}
+        keyboardType="phone-pad"
         onChangeText={t => setForm({...form, phone: t})}
         style={styles.input}
       />
@@ -78,21 +77,19 @@ export default function CustomerEditScreen({route, navigation}) {
         style={styles.input}
       />
 
-      {form.photo && <Image source={{uri: form.photo}} style={styles.image} />}
-
+      <PhotoPicker
+        photo={form.photo}
+        onChange={uri => setForm({...form, photo: uri})}
+      />
       <AppButton title="ذخیره تغییرات" onPress={save} />
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  image: {
-    marginTop: 20,
-    marginBottom: 20,
-    height: 'auto',
-    width: '100%',
-    aspectRatio: 1,
-    alignSelf: 'center',
+  container: {
+    padding: 16,
+    paddingBottom: 30,
   },
   input: {
     backgroundColor: '#fff',

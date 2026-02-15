@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, Image, StyleSheet, Alert} from 'react-native';
+import {View, ScrollView, Text, Image, StyleSheet, Alert} from 'react-native';
 // import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 import {getCustomerById, deleteCustomer} from '../database/customersRepo';
 import AppButton from '../components/AppButton';
@@ -29,9 +29,9 @@ export default function CustomerDetailScreen({route, navigation}) {
       },
     ]);
   };
-
+ 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.text}>مشتری محترم: {c.fullName}</Text>
       <Text style={styles.text}>شماره تماس: {c.phone}</Text>
       <Text style={styles.text}>نوع دستگاه: {c.device}</Text>
@@ -54,21 +54,24 @@ export default function CustomerDetailScreen({route, navigation}) {
         />
         <AppButton title="حذف مشتری" onPress={handleDelete} />
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    paddingBottom: 30,
   },
   image: {
     marginTop: 20,
     height: 'auto',
     width: '100%',
-    aspectRatio: 1,
-    alignSelf: 'center',
+    aspectRatio: 2 / 3,
+    marginBottom: 10,
+    borderRadius: 8,
   },
+
   buttonsView: {
     marginTop: 30,
     flexDirection: 'row',

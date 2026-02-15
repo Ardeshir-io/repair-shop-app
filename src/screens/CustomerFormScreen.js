@@ -51,14 +51,17 @@ export default function CustomerFormScreen({navigation}) {
       Alert.alert('خطا', 'شماره موبایل الزامی است');
       return;
     }
-
-    await insertCustomer({
-      ...form,
-      fullName: `${form.firstName} ${form.lastName}`,
-    });
-
-    Alert.alert('ثبت شد', 'مشتری با موفقیت ثبت شد');
-    navigation.navigate('خانه');
+    try {
+      await insertCustomer({
+        ...form,
+        fullName: `${form.firstName} ${form.lastName}`,
+      });
+      Alert.alert('ثبت شد', 'مشتری با موفقیت ثبت شد');
+      navigation.navigate('خانه');
+    } catch (error) {
+      Alert.alert('خطا', 'مشتری ثبت نشد! لطفا دوباره تلاش کنید');
+      console.log(error);
+    }
   };
 
   const tabBarHeight = useBottomTabBarHeight();

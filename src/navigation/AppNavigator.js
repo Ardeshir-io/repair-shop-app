@@ -15,21 +15,32 @@ import CustomerEditScreen from '../screens/CustomerEditScreen';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
+const tabScreenOptions = ({route}) => ({
+  tabBarIcon: ({color, size}) => {
+    let iconName = 'home';
+
+    if (route.name === 'خانه') {
+      iconName = 'home';
+    }
+    if (route.name === 'مشتری‌ها') {
+      iconName = 'person-add';
+    }
+    if (route.name === 'جستجو') {
+      iconName = 'search';
+    }
+    if (route.name === 'تنظیمات') {
+      iconName = 'settings';
+    }
+
+    return <Icon name={iconName} size={size} color={color} />;
+  },
+  headerShown: false,
+  tabBarActiveTintColor: '#1976d2',
+});
+
 function Tabs() {
   return (
-    <Tab.Navigator
-      screenOptions={({route}) => ({
-        tabBarIcon: ({color, size}) => {
-          let iconName = 'home';
-          if (route.name === 'خانه') iconName = 'home';
-          if (route.name === 'مشتری‌ها') iconName = 'person-add';
-          if (route.name === 'جستجو') iconName = 'search';
-          if (route.name === 'تنظیمات') iconName = 'settings';
-          return <Icon name={iconName} size={size} color={color} />;
-        },
-        headerShown: false,
-        tabBarActiveTintColor: '#1976d2',
-      })}>
+    <Tab.Navigator screenOptions={tabScreenOptions}>
       <Tab.Screen name="خانه" component={HomeScreen} />
       <Tab.Screen name="مشتری‌ها" component={CustomerFormScreen} />
       <Tab.Screen name="جستجو" component={SearchScreen} />
@@ -37,6 +48,29 @@ function Tabs() {
     </Tab.Navigator>
   );
 }
+
+// function Tabs() {
+//   return (
+//     <Tab.Navigator
+//       screenOptions={({route}) => ({
+//         tabBarIcon: ({color, size}) => {
+//           let iconName = 'home';
+//           if (route.name === 'خانه') iconName = 'home';
+//           if (route.name === 'مشتری‌ها') iconName = 'person-add';
+//           if (route.name === 'جستجو') iconName = 'search';
+//           if (route.name === 'تنظیمات') iconName = 'settings';
+//           return <Icon name={iconName} size={size} color={color} />;
+//         },
+//         headerShown: false,
+//         tabBarActiveTintColor: '#1976d2',
+//       })}>
+//       <Tab.Screen name="خانه" component={HomeScreen} />
+//       <Tab.Screen name="مشتری‌ها" component={CustomerFormScreen} />
+//       <Tab.Screen name="جستجو" component={SearchScreen} />
+//       <Tab.Screen name="تنظیمات" component={SettingsScreen} />
+//     </Tab.Navigator>
+//   );
+// }
 
 export default function AppNavigator() {
   return (

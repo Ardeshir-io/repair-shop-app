@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: 'auto',
-    aspectRatio: 1,
+    aspectRatio: 2 / 3,
     marginBottom: 10,
     borderRadius: 8,
   },

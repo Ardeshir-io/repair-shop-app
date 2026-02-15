@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
-  // Switch,
   TextInput,
   TouchableOpacity,
   FlatList,
@@ -60,7 +59,9 @@ export default function SettingsScreen() {
   // };
 
   const addCategory = () => {
-    if (!newCategory.trim()) return;
+    if (!newCategory.trim()) {
+      return;
+    }
 
     if (categories.includes(newCategory)) {
       Alert.alert('خطا', 'این گروه قبلاً وجود دارد');
@@ -73,31 +74,17 @@ export default function SettingsScreen() {
   };
 
   const removeCategory = cat => {
-    Alert.alert(
-      'حذف گروه',
-      `آیا مشتری‌هایی که گروه «${cat}» دارند به گروه دیگری منتقل شوند؟`,
-      [
-        {
-          text: 'خیر',
-          style: 'destructive',
-          onPress: () => {
-            const updated = categories.filter(c => c !== cat);
-            saveCategories(updated);
-          },
+    Alert.alert('حذف گروه', 'آیا از حذف این گروه مطمئن هستید؟', [
+      {text: 'انصراف', style: 'cancel'},
+      {
+        text: 'بله! گروه حذف شود',
+        style: 'destructive',
+        onPress: () => {
+          const updated = categories.filter(c => c !== cat);
+          saveCategories(updated);
         },
-        {
-          text: 'بله',
-          onPress: () => {
-            Alert.alert(
-              'انتخاب گروه جدید',
-              'بعداً در دیتابیس همه مشتری‌ها به این گروه منتقل می‌شوند',
-            );
-            const updated = categories.filter(c => c !== cat);
-            saveCategories(updated);
-          },
-        },
-      ],
-    );
+      },
+    ]);
   };
 
   // const toggleRequired = key => {
@@ -108,7 +95,7 @@ export default function SettingsScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>⚙️ مدیریت برنامه</Text>
-      {/* 
+      {/*
       <Text style={styles.section}>فیلدهای ضروری ثبت مشتری</Text>
 
       {Object.keys(requiredFields).map(key => (
