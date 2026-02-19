@@ -58,11 +58,47 @@ export default function CustomerEditScreen({route, navigation}) {
         onChangeText={t => setForm({...form, phone: t})}
         style={styles.input}
       />
+
+      <TextInput
+        placeholder="فرد تحویل گیرنده"
+        value={form.recipientName}
+        placeholderTextColor="#999"
+        style={styles.input}
+        onChangeText={rn => setForm({...form, recipientName: rn})}
+      />
+
       <DeviceDropdown
         value={form.device}
         onSelect={v => setForm({...form, device: v})}
         categories={categories}
       />
+
+      <TextInput
+        placeholder="رنگ و مدل دستگاه مشتری"
+        value={form.deviceTypeColor}
+        placeholderTextColor="#999"
+        style={styles.input}
+        onChangeText={dt => setForm({...form, deviceTypeColor: dt})}
+      />
+
+      <TextInput
+        placeholder="هزینه تعمیر (تومان)"
+        value={form.amount}
+        placeholderTextColor="#999"
+        keyboardType="numeric"
+        style={styles.input}
+        onChangeText={a => setForm({...form, amount: a})}
+      />
+
+      <TextInput
+        placeholder="مبلغ دریافتی (تومان)"
+        value={form.amountPaid}
+        placeholderTextColor="#999"
+        keyboardType="decimal-pad"
+        style={styles.input}
+        onChangeText={ap => setForm({...form, amountPaid: ap})}
+      />
+
       <TextInput
         placeholder="شرح خرابی"
         placeholderTextColor="#999"
@@ -71,16 +107,34 @@ export default function CustomerEditScreen({route, navigation}) {
         style={styles.input}
       />
       <TextInput
+        placeholder="تاریخ ثبت سفارش"
+        value={form.orderDate}
         placeholderTextColor="#999"
-        value={form.date}
-        onChangeText={t => setForm({...form, date: t})}
         style={styles.input}
+        onChangeText={od => setForm({...form, orderDate: od})}
+      />
+
+      <TextInput
+        placeholder="تاریخ تعمیر دستگاه"
+        value={form.repairDate}
+        placeholderTextColor="#999"
+        style={styles.input}
+        onChangeText={rd => setForm({...form, repairDate: rd})}
+      />
+
+      <TextInput
+        placeholder="تاریخ تحویل به مشتری"
+        value={form.deliveryDate}
+        placeholderTextColor="#999"
+        style={styles.input}
+        onChangeText={dd => setForm({...form, deliveryDate: dd})}
       />
 
       <PhotoPicker
         photo={form.photo}
         onChange={uri => setForm({...form, photo: uri})}
       />
+
       <AppButton title="ذخیره تغییرات" onPress={save} />
     </ScrollView>
   );

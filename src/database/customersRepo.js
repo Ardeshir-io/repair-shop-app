@@ -7,11 +7,16 @@ export const initDB = async () => {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       fullName TEXT,
       phone TEXT,
+      recipientName TEXT,
       device TEXT,
+      deviceTypeColor TEXT,
       description TEXT,
+      amount TEXT,
+      amountPaid TEXT,
       photo TEXT,
-      audio TEXT,
-      date TEXT
+      orderDate TEXT,
+      repairDate TEXT,
+      deliveryDate TEXT
     )
   `);
 };
@@ -20,9 +25,22 @@ export const insertCustomer = async c => {
   const db = await getDB();
   await db.executeSql(
     `INSERT INTO customers 
-     (fullName, phone, device, description, photo, audio, date)
-     VALUES (?, ?, ?, ?, ?, ?, ?)`,
-    [c.fullName, c.phone, c.device, c.description, c.photo, c.audio, c.date],
+     (fullName, phone, recipientName, device, deviceTypeColor, description, amount, amountPaid, photo, orderDate, repairDate, deliveryDate)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      c.fullName,
+      c.phone,
+      c.recipientName,
+      c.device,
+      c.deviceTypeColor,
+      c.description,
+      c.amount,
+      c.amountPaid,
+      c.photo,
+      c.orderDate,
+      c.repairDate,
+      c.deliveryDate,
+    ],
   );
 };
 
@@ -59,16 +77,21 @@ export const updateCustomer = async customer => {
   const db = await getDB();
   await db.executeSql(
     `UPDATE customers 
-     SET fullName=?, phone=?, device=?, description=?, photo=?, audio=?, date=? 
+     SET fullName=?, phone=?, recipientName=?, device=?, deviceTypeColor=?, description=?, amount=?, amountPaid=?, photo=?, orderDate=?, repairDate=?, deliveryDate=? 
      WHERE id=?`,
     [
       customer.fullName,
       customer.phone,
+      customer.recipientName,
       customer.device,
+      customer.deviceTypeColor,
       customer.description,
+      customer.amount,
+      customer.amountPaid,
       customer.photo,
-      customer.audio,
-      customer.date,
+      customer.orderDate,
+      customer.repairDate,
+      customer.deliveryDate,
       customer.id,
     ],
   );

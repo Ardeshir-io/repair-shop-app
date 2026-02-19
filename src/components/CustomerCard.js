@@ -8,9 +8,13 @@ export default function CustomerCard({customer, onPress}) {
         <Image source={{uri: customer.photo}} style={styles.image} />
       )}
       <View style={styles.container}>
-        <Text style={styles.text}>نام مشتری:‌{customer.fullName}</Text>
-        <Text style={styles.text}>شماره تماس:‌{customer.phone}</Text>
+        <Text style={styles.text}>نام مشتری:‌ {customer.fullName}</Text>
+        <Text style={styles.text}>شماره تماس:‌ {customer.phone}</Text>
         <Text style={styles.text}>نوع دستگاه: {customer.device}</Text>
+        <Text style={styles.text}>
+          رنگ و مدل دستگاه: {customer.deviceTypeColor}
+        </Text>
+        <Text style={styles.text}>تاریخ ثبت سفارش: {customer.orderDate}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -28,8 +32,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   image: {
-    height: 70,
-    width: 70,
+    height: 100,
+    width: 100,
     borderRadius: 8,
   },
   text: {

@@ -18,11 +18,17 @@ export default function CustomerFormScreen({navigation}) {
       firstName: '',
       lastName: '',
       phone: '',
+      recipientName: '',
       device: '',
+      deviceTypeColor: '',
       description: '',
+      amount: '',
+      amountPaid: '',
       photo: null,
-      audio: null,
-      date: todayJalali(),
+      // audio: null,
+      orderDate: todayJalali(),
+      repairDate: todayJalali(),
+      deliveryDate: todayJalali(),
     }),
     [],
   );
@@ -47,6 +53,10 @@ export default function CustomerFormScreen({navigation}) {
   );
 
   const save = async () => {
+    if (!form.lastName) {
+      Alert.alert('خطا', 'نام خانوادگی الزامی است');
+      return;
+    }
     if (!form.phone) {
       Alert.alert('خطا', 'شماره موبایل الزامی است');
       return;
@@ -97,10 +107,44 @@ export default function CustomerFormScreen({navigation}) {
         onChangeText={t => setForm({...form, phone: t})}
       />
 
+      <TextInput
+        placeholder="فرد تحویل گیرنده"
+        value={form.recipientName}
+        placeholderTextColor="#999"
+        style={styles.input}
+        onChangeText={r => setForm({...form, recipientName: r})}
+      />
+
       <DeviceDropdown
         value={form.device}
         onSelect={v => setForm({...form, device: v})}
         categories={categories}
+      />
+
+      <TextInput
+        placeholder="رنگ و مدل دستگاه مشتری"
+        value={form.deviceTypeColor}
+        placeholderTextColor="#999"
+        style={styles.input}
+        onChangeText={dt => setForm({...form, deviceTypeColor: dt})}
+      />
+
+      <TextInput
+        placeholder="هزینه تعمیر (هزار تومان)"
+        value={form.amount}
+        placeholderTextColor="#999"
+        keyboardType="decimal-pad"
+        style={styles.input}
+        onChangeText={a => setForm({...form, amount: a})}
+      />
+
+      <TextInput
+        placeholder="مبلغ دریافتی (هزار تومان)"
+        value={form.amountPaid}
+        placeholderTextColor="#999"
+        keyboardType="decimal-pad"
+        style={styles.input}
+        onChangeText={ap => setForm({...form, amountPaid: ap})}
       />
 
       <TextInput
@@ -112,11 +156,27 @@ export default function CustomerFormScreen({navigation}) {
         onChangeText={t => setForm({...form, description: t})}
       />
       <TextInput
-        placeholder="تاریخ"
-        value={form.date}
+        placeholder="تاریخ ثبت سفارش"
+        value={form.orderDate}
         placeholderTextColor="#999"
         style={styles.input}
-        onChangeText={t => setForm({...form, date: t})}
+        onChangeText={od => setForm({...form, orderDate: od})}
+      />
+
+      <TextInput
+        placeholder="تاریخ تعمیر دستگاه"
+        value={form.repairDate}
+        placeholderTextColor="#999"
+        style={styles.input}
+        onChangeText={rd => setForm({...form, repairDate: rd})}
+      />
+
+      <TextInput
+        placeholder="تاریخ تحویل به مشتری"
+        value={form.deliveryDate}
+        placeholderTextColor="#999"
+        style={styles.input}
+        onChangeText={dd => setForm({...form, deliveryDate: dd})}
       />
 
       <PhotoPicker

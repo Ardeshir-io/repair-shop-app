@@ -12,10 +12,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const DEFAULT_CATEGORIES = [
   'جاروبرقی',
-  'تلویزیون',
-  'وسایل سرمایشی',
-  'وسایل گرمایشی',
-  'وسایل آشپزخانه',
+  'اتو',
+  'سماور',
+  'کتری برقی',
+  'پنکه',
+  'چرخ گوشت',
 ];
 
 // const DEFAULT_REQUIRED_FIELDS = {
